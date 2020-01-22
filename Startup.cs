@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
+using System.Collections;
 
 namespace capstone_backend
 {
@@ -34,7 +35,7 @@ namespace capstone_backend
       services.AddControllers();
       services.AddCors(options =>
       {
-        options.AddDefaultPolicy(builder => builder.WithOrigins("https://nurse2nursesat.netlify.com", "https://admin-page-nurse-2-nurse.netlify.com").AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+        options.AddDefaultPolicy(builder => builder.WithOrigins("https://nurse2nursesat.netlify.com", "https://skills.nurse2nursestaffing.com", "https://admin-page-nurse-2-nurse.netlify.com").AllowAnyMethod().AllowAnyHeader().AllowCredentials());
       });
 
       services.AddSwaggerGen(c =>
@@ -42,7 +43,7 @@ namespace capstone_backend
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
       });
       services.AddDbContext<DatabaseContext>();
-      var TokenKey = Environment.GetEnvironmentVariable("TOKEN-KEY");
+      var TokenKey = Environment.GetEnvironmentVariable("TOKEN_KEY");
 
       services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

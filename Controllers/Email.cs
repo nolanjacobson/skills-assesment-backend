@@ -14,7 +14,7 @@ namespace capstone_backend.Controllers
     public static IRestResponse SendEmail(Nurse newNurse)
     {
       byte[] bytes = System.Convert.FromBase64String(newNurse.TestDataPdf.Substring(51));
-      var apiKey = Environment.GetEnvironmentVariable("MAIL-GUN");
+      var apiKey = Environment.GetEnvironmentVariable("MAIL_GUN");
       RestClient client = new RestClient();
       client.BaseUrl = new Uri("https://api.mailgun.net/v3");
       client.Authenticator =

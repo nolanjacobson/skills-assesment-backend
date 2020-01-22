@@ -54,6 +54,16 @@ namespace capstone_backend.Controllers
       }
     }
 
+    [HttpDelete("{id}")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
+    public ActionResult DeleteNurse(int id)
+    {
+      var nurse = Db.Nurse.FirstOrDefault(nurse => nurse.Id == id);
+      Db.Nurse.Remove(nurse);
+      Db.SaveChanges();
+      return Ok($"Success! {nurse.FirstName} {nurse.LastName} has been deleted.");
+    }
 
   }
 }

@@ -11,7 +11,7 @@ namespace capstone_backend.Services
   {
     public AuthenticatedData CreateToken(Models.User user)
     {
-      var TokenKey = Environment.GetEnvironmentVariable("TOKEN-KEY");
+      var TokenKey = Environment.GetEnvironmentVariable("TOKEN_KEY");
 
       var expirationTime = DateTime.UtcNow.AddHours(10);
 

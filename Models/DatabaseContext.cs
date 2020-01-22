@@ -23,7 +23,8 @@ namespace capstone_backend.Models
       if (!optionsBuilder.IsConfigured)
       {
         var envConn = Environment.GetEnvironmentVariable("DATABASE_URL");
-        var conn = "server=localhost;database=productionDatabase; User Id=postgres; password=1234";
+        var password = Environment.GetEnvironmentVariable("PASSWORD");
+        var conn = $"server=localhost;database=productionDatabase; User Id=postgres; password={password}";
         if (envConn != null)
         {
           conn = ConvertPostConnectionToConnectionString(envConn);
