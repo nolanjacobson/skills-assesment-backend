@@ -10,6 +10,7 @@ namespace capstone_backend.Models
 
     [Required]
     public string Email { get; set; }
-    
+
+    public string SecretHash { get; set; }
   }
 }

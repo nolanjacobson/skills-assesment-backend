@@ -4,5 +4,7 @@ namespace capstone_backend.ViewModels
   {
     public string Email { get; set; }
     public string Password { get; set; }
+
+    public string SecretHash {get; set;}
   }
 }

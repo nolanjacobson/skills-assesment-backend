@@ -19,8 +19,12 @@ namespace capstone_backend.Controllers
   public class NurseInformationController : ControllerBase
   {
 
-    static DatabaseContext Db = new DatabaseContext();
+    private readonly DatabaseContext Db;
 
+    public NurseInformationController(DatabaseContext context)
+    {
+      this.Db = context;
+    }
     [HttpPost]
 
     public ActionResult PostNurseInformation(Nurse newNurse)
@@ -36,14 +40,14 @@ namespace capstone_backend.Controllers
 
     public ActionResult GetAllNurses()
     {
-      return Ok(Db.Nurse);
+      return Ok(Db.Nurse.Select(s => new { s.Id, s.FirstName, s.LastName, s.NurseEmail, s.PhoneNumber, s.RecruiterEmail, s.SkillsTestName, s.TimeSubmitted }));
     }
     [HttpGet("{id}")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     public ActionResult GetANurse(int id)
     {
-      var nurse = Db.Nurse.FirstOrDefault(theId => theId.Id == id);
+      var nurse = Db.Nurse.Where(theId => theId.Id == id).Select(theId => theId.TestDataPdf);
       if (id != 0)
       {
         return Ok(nurse);

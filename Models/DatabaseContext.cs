@@ -2,6 +2,8 @@
 using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
+
 namespace capstone_backend.Models
 {
   public partial class DatabaseContext : DbContext
@@ -10,6 +12,13 @@ namespace capstone_backend.Models
     public DbSet<Recruiters> Recruiter { get; set; }
 
     public DbSet<User> Users { get; set; }
+
+    private readonly IConfiguration config;
+
+    public DatabaseContext(IConfiguration configuration)
+    {
+      this.config = configuration;
+    }
 
     private string ConvertPostConnectionToConnectionString(string connection)
     {
@@ -23,7 +32,7 @@ namespace capstone_backend.Models
       if (!optionsBuilder.IsConfigured)
       {
         var envConn = Environment.GetEnvironmentVariable("DATABASE_URL");
-        var password = Environment.GetEnvironmentVariable("PASSWORD");
+        var password = this.config["PASSWORD"];
         var conn = $"server=localhost;database=productionDatabase; User Id=postgres; password={password}";
         if (envConn != null)
         {

@@ -16,7 +16,7 @@ namespace capstone_backend
   public class Program
   {
 
-    
+
     public static async Task Main(string[] args)
     {
       var host = CreateWebHostBuilder(args).Build();

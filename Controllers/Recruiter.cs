@@ -18,8 +18,13 @@ namespace capstone_backend.Controllers
   [Route("api/[controller]")]
   public class RecruiterInformationController : ControllerBase
   {
-    static DatabaseContext Db = new DatabaseContext();
 
+    private readonly DatabaseContext Db;
+
+    public RecruiterInformationController(DatabaseContext context)
+    {
+      this.Db = context;
+    }
 
     [HttpDelete("delete/{email}")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]

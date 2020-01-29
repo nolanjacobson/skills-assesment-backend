@@ -13,5 +13,6 @@ namespace capstone_backend.Models
     public string SkillsTestName { get; set; }
     public string TestDataPdf { get; set; }
     public DateTime TimeSubmitted { get; set; } = DateTime.UtcNow;
+
   }
 }
